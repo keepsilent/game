@@ -43,7 +43,9 @@
     })
 
     document.body.style.overflow='hidden';
-    document.querySelector('body').addEventListener('touchstart', function (ev) {
-        event.preventDefault();
-    });
+    document.body.addEventListener('touchmove', function (ev) {
+        ev.preventDefault();
+        return false;
+    }, false)
+
 </script>
