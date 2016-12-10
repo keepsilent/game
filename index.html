@@ -5,7 +5,7 @@
         <title></title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
-        <link rel="stylesheet" type="text/css" href="css/main.css?v=3"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css?v=4"/>
     </head>
 
     <body onload="game.init()">
@@ -34,11 +34,13 @@
 </html>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/drop.js?v=1"></script>
+<script type="text/javascript" src="js/drop.js?v=2"></script>
 <script type="application/ecmascript">
     $('#ourplan').drop({
         action:function(tocher) {
             tocher.resetload();
         }
     })
+
+    document.body.style.overflow='hidden';
 </script>

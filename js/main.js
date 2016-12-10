@@ -366,6 +366,8 @@ var game = (function(){
         $('#contentdiv').css('width',width).css('height',height);
         $('#startdiv').css('width',width).css('height',height);
         $('#maindiv').css('width',width).css('height',height);
+        $('body').css('width',width).css('height',height);
+        $('html').css('width',width).css('height',height);
     }
 
     return {
