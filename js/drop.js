@@ -28,7 +28,7 @@
             },
             move:function(event) {
                 if (event.touches.length > 1 || event.scale && event.scale !== 1) { //多点触摸,当屏幕有多个touch或者页面被缩放过，就不执行move操作
-                    return false;
+                    //return false;
                 }
                 tocher.endPostion = {
                     x:event.touches[0].pageX,
