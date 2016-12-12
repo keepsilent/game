@@ -114,7 +114,8 @@ function ourplan(X,Y){
 /*
  创建本方飞机
  */
-var selfplan = new ourplan(120,485);
+
+var selfplan = new ourplan(120,300);
 //移动事件
 var ourPlan=document.getElementById('ourplan');
 var yidong=function(){
@@ -233,7 +234,6 @@ function start(){
 
     if(mark == 20){
         mark1++;
-
         if(mark1 % 5 == 0) { //中飞机
             enemys.push(new enemy(6,25,274,46,60,5000,360,random(1,3),"image/enemy3_fly_1.gif","image/enemy3_fly_1.png?v=1"));
         }
@@ -276,8 +276,8 @@ function start(){
 
     if(mark % 5 == 0) { //创建子弹
         bullets.push(new oddbulletBig(parseInt(selfplan.imagenode.style.left)+45,parseInt(selfplan.imagenode.style.top)));
-        bullets.push(new oddbulletSmall(parseInt(selfplan.imagenode.style.left)+15,parseInt(selfplan.imagenode.style.top) + 45));
-        bullets.push(new oddbulletSmall(parseInt(selfplan.imagenode.style.left)+80,parseInt(selfplan.imagenode.style.top) + 45));
+        //bullets.push(new oddbulletSmall(parseInt(selfplan.imagenode.style.left)+15,parseInt(selfplan.imagenode.style.top) + 45));
+        //bullets.push(new oddbulletSmall(parseInt(selfplan.imagenode.style.left)+80,parseInt(selfplan.imagenode.style.top) + 45));
     }
 
     var bulletslen = bullets.length;
@@ -366,8 +366,12 @@ var game = (function(){
         $('#contentdiv').css('width',width).css('height',height);
         $('#startdiv').css('width',width).css('height',height);
         $('#maindiv').css('width',width).css('height',height);
-        $('body').css('width',width).css('height',height);
-        $('html').css('width',width).css('height',height);
+        //$('body').css('width',width).css('height',height);
+        //$('html').css('width',width).css('height',height);
+        document.body.addEventListener('touchmove', function (event) {
+            event.preventDefault();
+            return false;
+        }, false)
     }
 
     return {

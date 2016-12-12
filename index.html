@@ -34,7 +34,7 @@
 </html>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/drop.js?v=2"></script>
+<script type="text/javascript" src="js/drop.js?v=3"></script>
 <script type="application/ecmascript">
     $('#ourplan').drop({
         action:function(tocher) {
@@ -42,10 +42,5 @@
         }
     })
 
-    document.body.style.overflow='hidden';
-    document.body.addEventListener('touchmove', function (ev) {
-        ev.preventDefault();
-        return false;
-    }, false)
-
+    //document.body.style.overflow='hidden';
 </script>
