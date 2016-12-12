@@ -345,7 +345,7 @@ function begin() { //开始游戏按钮点击事件
     selfplan.imagenode.style.display = "block";
     scorediv.style.display = "block";
 
-    set = setInterval(start,40); //调用开始函数
+    set = setInterval(start,20); //调用开始函数
 }
 
 function jixu() { //游戏结束后点击继续按钮事件
