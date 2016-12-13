@@ -1,40 +1,51 @@
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
-        <title></title>
-        <meta charset="utf-8"/>
+        <title>打署条君</title>
+        <meta http-equiv="Expires" content="-1">
+        <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
-        <link rel="stylesheet" type="text/css" href="css/main.css?v=4"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css?v=2016121301"/>
     </head>
-
     <body onload="game.init()">
-        <div id="contentdiv">
-            <div id="startdiv">
-                <button onclick="begin()">开始游戏</button>
-            </div>
-            <div id="maindiv">
-                <div id="scorediv">
-                    <label>分数：</label>
-                    <label id="label">0</label>
+        <div id="contentdiv" class="wrap">
+
+            <!-- Begin Start -->
+            <div id="startdiv" class="begin-wrap">
+                <div class="begin-inner">
+                    <div class="begin-btn-box">
+                        <span class="begin-btn tc" onclick="game.begin()">开始游戏</span>
+                    </div>
                 </div>
-                <div id="suspenddiv">
+            </div>
+            <!-- Begin End -->
+
+            <!-- Score Start -->
+            <div id="scorediv" class="score-wrap">
+                <p><span class="score-name">score</span><i>:</i><em id="label">0</em></p>
+            </div>
+            <!-- Score End -->
+
+            <div id="maindiv">
+                <div id="suspenddiv" style="visibility: hidden;">
                     <button>继续</button><br/>
                     <button>重新开始</button><br/>
                     <button>回到主页</button>
                 </div>
-                <div id="enddiv">
-                    <p class="plantext">飞机大战分数</p>
-                    <p id="planscore">0</p>
-                    <div><button onclick="jixu()">继续</button></div>
-                </div>
+            </div>
+
+            <div id="enddiv" class="over-wrap" style="visibility: hidden;">
+                <p class="plantext">飞机大战分数</p>
+                <p id="planscore">0</p>
+                <div><button onclick="jixu()">继续</button></div>
             </div>
         </div>
+
     </body>
 </html>
 <script type="text/javascript" src="js/zepto.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/drop.js?v=4"></script>
+<script type="text/javascript" src="js/drop.js?v=2016121302"></script>
 <script type="application/ecmascript">
     $('#ourplan').drop({
         action:function(tocher) {

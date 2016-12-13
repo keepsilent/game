@@ -106,8 +106,8 @@ function random(min,max){
 创建本方飞机类
  */
 function ourplan(X,Y){
-    var imagesrc="image/我的飞机.gif";
-    plan.call(this,1,X,Y,96,100,0,660,0,"image/本方飞机爆炸.gif?v=1",imagesrc);
+    var imagesrc="image/我的飞机.gif?v=2016121301";
+    plan.call(this,1,X,Y,69,91,0,660,0,"image/本方飞机爆炸.gif?v=2016121301",imagesrc);
     this.imagenode.setAttribute('id','ourplan');
 }
 
@@ -275,7 +275,7 @@ function start(){
     }
 
     if(mark % 5 == 0) { //创建子弹
-        bullets.push(new oddbulletBig(parseInt(selfplan.imagenode.style.left)+45,parseInt(selfplan.imagenode.style.top)));
+        bullets.push(new oddbulletBig(parseInt(selfplan.imagenode.style.left)+31,parseInt(selfplan.imagenode.style.top)));
         //bullets.push(new oddbulletSmall(parseInt(selfplan.imagenode.style.left)+15,parseInt(selfplan.imagenode.style.top) + 45));
         //bullets.push(new oddbulletSmall(parseInt(selfplan.imagenode.style.left)+80,parseInt(selfplan.imagenode.style.top) + 45));
     }
@@ -339,14 +339,6 @@ function start(){
 }
 
 var set;
-function begin() { //开始游戏按钮点击事件
-    startdiv.style.display = "none";
-    mainDiv.style.display = "block";
-    selfplan.imagenode.style.display = "block";
-    scorediv.style.display = "block";
-
-    set = setInterval(start,20); //调用开始函数
-}
 
 function jixu() { //游戏结束后点击继续按钮事件
     location.reload(true);
@@ -362,19 +354,39 @@ function jixu() { //游戏结束后点击继续按钮事件
 var game = (function(){
     var width = $(window).width();
     var height = $(window).height();
+
+    /**
+     *  游戏初始化
+     *  @method init
+     */
     var init = function() {
-        $('#contentdiv').css('width',width).css('height',height);
-        $('#startdiv').css('width',width).css('height',height);
-        $('#maindiv').css('width',width).css('height',height);
-        //$('body').css('width',width).css('height',height);
-        //$('html').css('width',width).css('height',height);
+        //设置容器大小
+        $('#contentdiv').css({'width':width,'height':height});
+        $('#startdiv').css({'width':width,'height':height});
+        $('#maindiv').css({'width':width,'height':height});
+
+        //阻止body冒泡事件
         document.body.addEventListener('touchmove', function (event) {
             event.preventDefault();
             return false;
         }, false)
     }
 
+    /**
+     * 游戏开始
+     * @method begin
+     */
+    var begin = function() {
+        startdiv.style.display = "none";
+        mainDiv.style.display = "block";
+        selfplan.imagenode.style.display = "block";
+        scorediv.style.display = "block";
+
+        set = setInterval(start,20); //调用开始函数
+    }
+
     return {
-      init:init
+        init:init
+        ,begin:begin
     }
 })();

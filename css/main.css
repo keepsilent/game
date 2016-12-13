@@ -1,31 +1,70 @@
 * { margin: 0; padding: 0; }
-button { outline: none; }
-html,body {
-    background: #F5F5F5;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-text-size-adjust: 100% /* 禁止文本缩放 */
--webkit-overflow-scrolling: touch;
-    -webkit-text-decoration-line: none;
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* 元素被触摸时产生的半透明灰色遮罩怎么去掉 */
-    overflow: hidden;
-}
+@charset "utf-8";
+/*	全居设置	*/
+html,body { width: 100%; height:100%; -webkit-touch-callout:none; -webkit-user-select: none; -webkit-text-decoration-line:none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-overflow-scrolling: touch; }
+html,body { color: #454545; font: 1em/1.5 微软雅黑,Arial, Helvetica, sans-serif; }
+html,body,h1,h2,h3,h4,h5,h6,p,form,ul,ol,li,dl,dt,dd,button,input,textarea,th,td { margin: 0; padding: 0; }
+img { border-style: none; }
+ul,ol {list-style: none; }
+i,em { font-style: normal; }
+a {  color: #313131; text-decoration: none; }
+a:active { filter: alpha(opacity = 75); -moz-opacity: 0.75; -webkit-opacity: 0.75; -khtml-opacity: 0.75; opacity: 0.75; }
+a:active,a:hover,a:visited { text-decoration: underline; }
+a:focus { outline: none; }
 
-#contentdiv { width: 320px; height: 593px; position: absolute; overflow: hidden; overflow-y: hidden; }
-#startdiv { width: 320px; height: 593px; background-image: url(../image/background.jpg); overflow-y: hidden; }
-#startdiv button { position: absolute; top: 400px; left: 82px; width: 150px; height: 30px; border: 1px solid black; border-radius: 30px;  background-color: #c4c9ca;  }
+/*	IE浏览器下固定定位会闪烁bug	*/
+*html { background-image: url(about:blank);	background-attachment: fixed; }
+
+/*	谷歌浏览器取消控制黄色边框	*/
+input,button,select,textarea { outline: none; -webkit-appearance: none; }
+textarea { resize: none; }
+
+/*	表格元素	*/
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: text-top; }
+
+/* 重新定义 */
+.fl { float: left; }
+.fr { float: right; }
+.tl { text-align: left; }
+.tr { text-align: right; }
+.tc { text-align: center; }
+
+.hide { display: none; }
+.clear { clear: both; height: 0px; line-height: 0px; font-size: 0px; }
+.word-break { white-space: normal; word-break: break-all; word-wrap: break-word; }
+.radius { -moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px; }
+.opacity { filter: alpha(opacity = 75); -moz-opacity: 0.75; -webkit-opacity: 0.75; -khtml-opacity: 0.75; opacity: 0.75; }
+.shadow { -moz-box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px; -webkit-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px; -khtml-box-shadow: rgba(200,200,200,0.7) 0 4px 10px -1px; box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px; }
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset; }
+button { outline: none; }
+
+.wrap  { position: absolute;  width: 100%; height: 100%; overflow: hidden; }
+
+.begin-wrap { position: fixed; width: 100%; height: 100%; background-image: url(../image/background.jpg); overflow-y: hidden; z-index: 10; }
+.begin-inner { position: relative; width: 100%; height: 100%; }
+.begin-btn-box { position: absolute; left:0; bottom: 0; width: 100%; }
+.begin-btn-box span { display: block; width: 80%; line-height: 42px; margin: 0 auto 20%; border: 1px solid black; border-radius: 30px; background-color: #c4c9ca; }
+
+.score-wrap { position: fixed; top: 10px; left: 15px; width: auto; z-index: 1; }
+.score-wrap p { color: #fddc51; font-size: 1.2em; line-height: 1; }
+.score-wrap p span.score-name { font-size: 1.4em; font-family: cursive,微软雅黑,Arial, Helvetica, sans-serif; }
+.score-wrap p i { margin-right: 10px; }
+
+.over-wrap { position: absolute; top: 210px; left: 75px; border: 1px solid gray; border-radius: 5px; text-align: center; background-color:#d7ddde; display: none; z-index: 2; }
+.over-wrap > div { width: 160px; height: 50px; }
+.over-wrap > div button { margin-top:10px ; width: 90px; height: 30px; border: 1px solid gray; border-radius: 30px; }
+
 
 #maindiv {  width: 320px; height: 593px; background-image:url(../image/background.jpg); display: none; overflow-y: hidden; }
 #maindiv img { position: absolute; z-index: 1; }
 
-#scorediv { font-size: 16px; font-weight: bold; position: absolute; top: 10px; left: 10px; display: none; }
-#scorediv { font-size: 18px; font-weight: bold; }
 
-#suspenddiv { position: absolute; top: 210px; left: 82px; display: none; z-index: 2; }
+
+#suspenddiv { position: absolute; top: 210px; left: 82px; z-index: 11; }
 #suspenddiv button { width: 150px; height: 30px; margin-bottom: 20px; border: 1px solid black; border-radius: 30px; background-color: #c4c9ca; }
-#enddiv { position: absolute; top: 210px; left: 75px; border: 1px solid gray; border-radius: 5px; text-align: center; background-color:#d7ddde; display: none; z-index: 2; }
+
 .plantext { width: 160px; height: 30px; line-height: 30px; font-size: 16px; font-weight: bold;}
 #planscore { width: 160px; height: 80px; line-height: 80px; border-top: 1px solid gray; border-bottom: 1px solid gray; font-size: 16px; font-weight: bold;  }
 
-#enddiv div { width: 160px; height: 50px; }
-#enddiv div button { margin-top:10px ; width: 90px; height: 30px; border: 1px solid gray; border-radius: 30px; }
+
