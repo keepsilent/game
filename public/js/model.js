@@ -1,11 +1,6 @@
 var mainDiv = document.getElementById("maindiv"); //获得主界面
 var startdiv = document.getElementById("startdiv");  //获得开始界面
-var scorediv = document.getElementById("scorediv");//获得游戏中分数显示界面
-var scorelabel = document.getElementById("label");  //获得分数界面
 var suspenddiv = document.getElementById("suspenddiv"); //获得暂停界面
-var enddiv = document.getElementById("enddiv"); //获得游戏结束界面
-var planscore = document.getElementById("planscore");  //获得游戏结束后分数统计界面
-
 
 /**
  * 敌人模型

@@ -39,6 +39,8 @@ var game = (function() {
         game.myself.imagenode.style.display = "none"; //初始化隐藏本方飞机
         game.role = document.getElementById('role');
 
+        //game.body = document.getElementsByTagName("body")[0];
+        //game.myself.imagenode.attachEvent("onclick",stop); //为本方飞机添加暂停事件
         /*
         game.body = document.getElementsByTagName("body")[0];
         if(document.addEventListener) {
@@ -75,7 +77,7 @@ var game = (function() {
         startdiv.style.display = "none";
         mainDiv.style.display = "block";
         game.myself.imagenode.style.display = "block";
-        scorediv.style.display = "block";
+        $('#score-box').show();
         game.playing = setInterval(start,20); //调用开始函数
     }
 
@@ -93,7 +95,7 @@ var game = (function() {
      */
     var stop = function() {
         if(game.stopStatus == 0) {
-            suspenddiv.style.display = "block";
+            //suspenddiv.style.display = "block";
             /*
             if(document.removeEventListener) {
                 mainDiv.removeEventListener("mousemove",roleMove,true);
@@ -102,10 +104,11 @@ var game = (function() {
                 mainDiv.detachEvent("onmousemove",roleMove);
                 game.body.detachEvent("onmousemove",boundary);
             }*/
+            $('#over-box').show();
             clearInterval(game.playing);
             game.stopStatus = 1;
         } else {
-            suspenddiv.style.display = "none";
+            //suspenddiv.style.display = "none";
             /*
             if(document.addEventListener) {
                 mainDiv.addEventListener("mousemove",roleMove,true);
@@ -114,6 +117,7 @@ var game = (function() {
                 mainDiv.attachEvent("onmousemove",roleMove);
                 game.body.attachEvent("onmousemove",boundary);
             }*/
+            $('#over-box').hide();
             game.playing = setInterval(start,20);
             game.stopStatus = 0;
         }
@@ -292,10 +296,13 @@ var game = (function() {
                    if(collide(game.enemys[j].imagenode.offsetLeft,game.enemys[j].plansizeX,game.myself.imagenode.offsetLeft,game.myself.plansizeX)) {
                         if(game.enemys[j].imagenode.offsetTop + game.enemys[j].plansizeY >= game.myself.imagenode.offsetTop + 40 && game.enemys[j].imagenode.offsetTop <= game.myself.imagenode.offsetTop - 20 + game.myself.plansizeY){
                             //碰撞本方飞机，游戏结束，统计分数
+                            $('#score-box').show();
+                            $('#over-box').show();
+                            $('#user-score').html(game.scores);
+                            game.playStatus = 0
+                            //game.enemys[j].imagenode.src = game.enemys[j].planboomimage;
                             game.myself.imagenode.src = "public/images/material/protagonist_explode.gif";
-                            enddiv.style.display = "block";
-                            planscore.innerHTML = game.scores;
-                            game.playStatus = 0;
+                            clearInterval(game.playing);
 
                             /*
                             if(document.removeEventListener) {
@@ -305,8 +312,6 @@ var game = (function() {
                                 mainDiv.detachEvent("onmousemove",roleMove);
                                 game.body.removeEventListener("mousemove",boundary,true);
                             }*/
-
-                            clearInterval(game.playing);
                         }
                     }
 
@@ -316,7 +321,7 @@ var game = (function() {
                             game.enemys[j].planhp = game.enemys[j].planhp - game.bullets[k].bulletattach; //敌机血量减子弹攻击力
                             if(game.enemys[j].planhp == 0) {  //敌机血量为0，敌机图片换为爆炸图片，死亡标记为true，计分
                                 game.scores += game.enemys[j].planscore;
-                                scorelabel.innerHTML = game.scores;
+                                $('#score-value').html(game.scores);
                                 game.enemys[j].imagenode.src = game.enemys[j].planboomimage;
                                 game.enemys[j].planisdie = true;
                             }

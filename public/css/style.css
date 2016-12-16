@@ -8,8 +8,7 @@ img { border-style: none; }
 ul,ol {list-style: none; }
 i,em { font-style: normal; }
 a {  color: #313131; text-decoration: none; }
-a:active { filter: alpha(opacity = 75); -moz-opacity: 0.75; -webkit-opacity: 0.75; -khtml-opacity: 0.75; opacity: 0.75; }
-a:active,a:hover,a:visited { text-decoration: underline; }
+a:active,a:hover,a:visited { text-decoration: none; }
 a:focus { outline: none; }
 
 /*	IE浏览器下固定定位会闪烁bug	*/
@@ -83,27 +82,89 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset; }
 .rank-footer span { padding-top: 5px; padding-bottom: 6px; color: #ff1919; font-size: 0.875em; border-bottom: solid 1px #ff1919; }
 
 
+/* 朋友圈 */
+.friends-wrap { width: 100%; height: auto; }
+.friends-header { position: relative; width: 100%; height: auto; }
+.friends-header div { position: absolute; top: 13%; left: 0; width: 100%; }
+.friends-header div a { display: block; width: 70%; line-height: 48px; margin: 0 auto 15px; color: #000; border-radius: 30px; background-color: #fedf2c; }
+.friends-header div a:hover,.friends-header div a:active,.friends-header div a:visited { color: #000; }
 
+.friends-main { width: 100%; height: auto; padding: 10% 0; }
+.friends-main table { width: 100%; }
+.friends-main table tr td:first-child { width: 55%; }
+.friends-main table tr td:first-child { vertical-align: middle; }
+.friends-main table tr td:first-child div { padding-left: 10%; }
+.friends-main table tr td:first-child div span { padding-bottom: 5px; margin-bottom: 15px; color: #ff1919; font-size: 1.3em; font-weight: bolder; border-bottom: solid 1px #ff1919; }
+.friends-main table tr td:first-child div p { color: #000; line-height: 1.2; }
+.friends-main table tr td:first-child div p.first-child { padding-top: 10px; }
+.friends-main table tr td:first-child div p.last-child { padding-bottom: 1px; }
+.friends-main table tr td:first-child div h3 { color: #000; font-size: 1.2em; }
+.friends-main table tr td:last-child { width: 45%; }
+.friends-main table tr td:last-child img { margin-left: 5%; }
 
-.wrap  { position: absolute;  width: 100%; height: 100%; overflow: hidden; }
+/* 游戏首页 */
+.index-wrap { position: absolute;  width: 100%; height: 100%; overflow: hidden; }
 
-.begin-wrap { position: fixed; width: 100%; height: 100%; background-color: #212a43; background-repeat: no-repeat; background-image: url(../images/index/index_bg.jpg); background-size: 100% auto; overflow-y: hidden; z-index: 10; }
+.share-box { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 11; }
+
+/* 游戏开始界面 */
+.begin-wrap { position: fixed; top:0; left: 0; width: 100%; height: 100%; background-color: #212a43; background-repeat: no-repeat; background-image: url(../images/index/index_bg.jpg); background-size: 100% auto; overflow-y: hidden; z-index: 10; }
 .begin-inner { position: relative; width: 100%; height: 100%; }
 .begin-btn-box { position: absolute; left:0; bottom: 0; width: 100%; }
 .begin-btn-box span { display: block; width: 80%; line-height: 42px; margin: 0 auto 15px; color: #000; border-radius: 30px; background-color: #fedf2c; }
 .begin-btn-box span.begin-btn { background: #FFF; }
 
+/* 游戏积分 */
 .score-wrap { position: fixed; top: 10px; left: 15px; width: auto; z-index: 1; }
 .score-wrap p { color: #fddc51; font-size: 1.2em; line-height: 1; }
 .score-wrap p span.score-name { font-size: 1.4em; font-family: cursive,微软雅黑,Arial, Helvetica, sans-serif; }
 .score-wrap p i { margin-right: 10px; }
 
+/* 游戏GG */
+.over-wrap { position: fixed; top:0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 10; }
+.over-inner { position: relative; width: 100%; height: 100%; }
+.over-box-wrap { position: absolute;  top: 50%; left: 0; width: 100%; height: auto; }
+.over-wrap div.over-box {  width: 80%; margin: -111.5px auto 0 ;  padding: 15px 0 20px; background: #FFF; border-radius: 30px; }
+.over-wrap div.over-box dl { width: 80%; margin: 0 auto; font-size: 1.2em; }
+.over-wrap div.over-box dl dt { padding-bottom: 10px; margin-bottom: 15px; color: #ff1919; border-bottom: solid 1px #000;  }
+.over-wrap div.over-box dl dd { margin-top: 10px; }
+.over-wrap div.over-box dl dd a { display: block; width: 80%; margin: 0 auto; line-height: 38px; color: #000; font-size: 0.875em; background: #ffd83b; border-radius: 20px; }
+.over-wrap div.over-box dl dd a:hover,
+.over-wrap div.over-box dl dd a:active,
+.over-wrap div.over-box dl dd a:visited { color: #333;}
+
+/* 游戏规则 */
+.rule-wrap { position: fixed; top:0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 10; }
+.rule-inner { position: relative; width: 100%; height: 100%; }
+.rule-box-wrap { position: absolute; top: 5%; left: 0; width: 100%; height: auto; }
+.rule-box-inner { position: relative; width: 95%; margin: 0 auto; color: #333; background: #ffd83b; border-radius: 5px; overflow-y: scroll;}
+
+.rule-box-wrap span.rule-close-btn { position: absolute; top: -15px; right: 0; display: block; width: 32px; line-height: 32px; color: #FFF; background: #ffd800; border:solid 2px #FFF; border-radius: 100%; z-index: 1;}
+.rule-box-inner div.rule-prize-list h1 { padding: 5% 0 2%; font-size: 1.8em; font-weight: bolder; }
+.rule-box-inner div.rule-prize-list table { width: 80%; margin: 0 auto; font-size: 0.875em; }
+.rule-box-inner div.rule-prize-list table tr td { line-height: 1.8; }
+.rule-box-inner div.rule-prize-list table tr td a { color: #ff1919; }
+.rule-box-inner div.rule-prize-list table tr td a:hover,
+.rule-box-inner div.rule-prize-list table tr td a:active,
+.rule-box-inner div.rule-prize-list table tr td a:visited { color: #ff1919; }
+
+.rule-box-inner div.rule-active-time { margin-top: 5%; color: #333; }
+.rule-box-inner div.rule-active-time h3 { width: 90%; margin: 0 auto; padding: 2px 0; font-size: 0.875em; line-height: 2; font-weight: normal; background: #ffa10d; border-radius: 5px; }
+.rule-box-inner div.rule-active-time p { font-size: 0.875em; line-height: 3.5; }
+
+.rule-box-inner div.rule-info {  padding-bottom: 5%; color: #333; }
+.rule-box-inner div.rule-info h3 { width: 90%; margin: 0 auto;  padding: 2px 0; font-size: 0.875em; line-height: 2; font-weight: normal; background: #ffa10d; border-radius: 5px; }
+.rule-box-inner div.rule-info ul { width: 90%; margin: 5% auto 0; font-size: 0.875em; line-height: 1.8; }
+
+
+
+/*
 .over-wrap { position: absolute; top: 210px; left: 75px; border: 1px solid gray; border-radius: 5px; text-align: center; background-color:#d7ddde; display: none; z-index: 2; }
 .over-wrap > div { width: 160px; height: 50px; }
 .over-wrap > div button { margin-top:10px ; width: 90px; height: 30px; border: 1px solid gray; border-radius: 30px; }
+*/
 
-
-#maindiv {  width: 320px; height: 593px; background-image:url(../images/material/background.jpg); display: none; overflow-y: hidden; }
+#maindiv { width: 320px; height: 593px; background-image:url(../images/material/background.jpg); display: none; overflow-y: hidden; }
 #maindiv img { position: absolute; z-index: 1; }
 
 

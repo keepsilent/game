@@ -15,8 +15,8 @@
                 <div class="begin-inner">
                     <div class="begin-btn-box">
                         <span class="begin-btn tc" onclick="game.begin()">开始游戏</span>
-                        <span class="share-btn tc" onclick="game.begin()">邀请好友</span>
-                        <span class="price-btn tc" onclick="game.begin()">奖品设置</span>
+                        <span class="share-btn tc" onclick="config.share(1)">邀请好友</span>
+                        <span class="price-btn tc" onclick="rule.show(1)">奖品设置</span>
 
                     </div>
                 </div>
@@ -24,31 +24,106 @@
             <!-- Begin End -->
 
             <!-- Score Start -->
-            <div id="scorediv" class="score-wrap hide">
-                <p><span class="score-name">score</span><i>:</i><em id="label">0</em></p>
+            <div id="score-box" class="score-wrap hide">
+                <p><span class="score-name">score</span><i>:</i><em id="score-value">0</em></p>
             </div>
             <!-- Score End -->
 
-            <div id="maindiv">
+            <!-- Main Start -->
+            <div id="maindiv" onclick="game.stop()"></div>
+            <!-- Main End -->
 
+            <!-- Over Start -->
+            <div id="over-box" class="over-wrap hide">
+                <div class="over-inner">
+                    <div class="over-box-wrap">
+                        <div class="over-box">
+                            <dl>
+                                <dt class="tc">分数: <i id="user-score">0</i></dt>
+                                <dd><a class="tc" href="javascript:game.stop();">继续</a></dd>
+                                <dd><a class="tc" href="javascript:void(0);">重新开始</a></dd>
+                                <dd><a class="tc" href="./index.html">回到首页</a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Over End -->
+            <!--
+           <div id="suspenddiv" class="hide">
+               <button>继续</button><br/>
+               <button>重新开始</button><br/>
+               <button>回到主页</button>
+           </div>
 
-            <div id="suspenddiv" class="hide">
-                <button>继续</button><br/>
-                <button>重新开始</button><br/>
-                <button>回到主页</button>
-            </div>
 
-            <div id="enddiv" class="over-wrap hide">
-                <p class="plantext">飞机大战分数</p>
-                <p id="planscore">0</p>
-                <div><button onclick="game.proceed()">继续</button></div>
+           <div id="enddiv" class="over-wrap" >
+               <p class="plantext">飞机大战分数</p>
+               <p id="planscore">0</p>
+               <div><button onclick="game.proceed()">继续</button></div>
+           </div>
+           -->
+        </div>
+        <div id="share-box" class="share-box hide" onclick="config.share(0)">
+            <img src="./public/images/index/index_share.png" width="100%"/>
+        </div>
+        <!-- Rule Start -->
+        <div id="rule-box" class="rule-wrap hide">
+            <div class="rule-inner">
+                <div id="rule-box-wrap" class="rule-box-wrap">
+                    <span class="rule-close-btn tc" onclick="rule.show(0)">X</span>
+                        <div id="rule-box-inner" class="rule-box-inner">
+
+                            <div class="rule-prize-list">
+                                <h1 class="tc">奖品设置</h1>
+                                <table  border="0" cellspacing="0" cellpadding="0">
+                                    <tbody>
+                                        <tr>
+                                            <td>一等奖:</td>
+                                            <td>价值500元的卡壮烤箱</td>
+                                            <td class="tr"><a href="./prize_1.html">详情</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>二等奖:</td>
+                                            <td>价值300元的手持拌搅机</td>
+                                            <td class="tr"><a href="./prize_2.html">详情</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>三等奖:</td>
+                                            <td>价值150元的打蛋器</td>
+                                            <td class="tr"><a href="./prize_3.html">详情</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>优秀奖:</td>
+                                            <td>价值20元的咖啡一包</td>
+                                            <td class="tr"><a href="./prize_4.html">详情</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="rule-active-time tc">
+                                <h3>活动时间</h3>
+                                <p>2016年16月25日 - 2017年01月02日</p>
+                            </div>
+                            <div class="rule-info">
+                                <h3 class="tc">活动说明</h3>
+                                <ul>
+                                    <li>1.奖品设置按照前十名最高分，前三名分别获得一等奖、二等奖、三等奖，剩余七名为优秀奖</li>
+                                    <li>2.活动截止后3个工作日内联系获奖方确认收货地址，会在3个工作日内寄完礼品</li>
+                                    <li>3.为保持公平公正，禁止作弊，会在活动结后三个工作日内核实真实信息，如查到作弊者，取消活动资格</li>
+                                    <li>4.获奖者需要关注公众号，方便联系</li>
+                                    <li>5.最终解释权归源熙式网络科技公司所有</li>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
-
+        <!-- Rule End -->
     </body>
 </html>
 <script type="text/javascript" src="public/js/lib/zepto.min.js?v=2016121601"></script>
+<script type="text/javascript" src="public/js/app.js?v=2016121601"></script>
 <script type="text/javascript" src="public/js/model.js?v=2016121601"></script>
 <script type="text/javascript" src="public/js/tocher.js?v=2016121601"></script>
 <script type="text/javascript" src="public/js/game.js?v=2016121601"></script>
