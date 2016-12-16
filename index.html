@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>打署条君</title>
+        <title>打薯条君</title>
         <meta http-equiv="Expires" content="-1">
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
-        <link rel="stylesheet" type="text/css" href="css/main.css?v=2016121301"/>
+        <link rel="stylesheet" type="text/css" href="public/css/style.css?v=2016121601"/>
     </head>
     <body onload="game.init()">
         <div id="contentdiv" class="wrap">
@@ -15,41 +15,40 @@
                 <div class="begin-inner">
                     <div class="begin-btn-box">
                         <span class="begin-btn tc" onclick="game.begin()">开始游戏</span>
+                        <span class="share-btn tc" onclick="game.begin()">邀请好友</span>
+                        <span class="price-btn tc" onclick="game.begin()">奖品设置</span>
+
                     </div>
                 </div>
             </div>
             <!-- Begin End -->
 
             <!-- Score Start -->
-            <div id="scorediv" class="score-wrap">
+            <div id="scorediv" class="score-wrap hide">
                 <p><span class="score-name">score</span><i>:</i><em id="label">0</em></p>
             </div>
             <!-- Score End -->
 
             <div id="maindiv">
-                <div id="suspenddiv" style="visibility: hidden;">
-                    <button>继续</button><br/>
-                    <button>重新开始</button><br/>
-                    <button>回到主页</button>
-                </div>
+
             </div>
 
-            <div id="enddiv" class="over-wrap" style="visibility: hidden;">
+            <div id="suspenddiv" class="hide">
+                <button>继续</button><br/>
+                <button>重新开始</button><br/>
+                <button>回到主页</button>
+            </div>
+
+            <div id="enddiv" class="over-wrap hide">
                 <p class="plantext">飞机大战分数</p>
                 <p id="planscore">0</p>
-                <div><button onclick="jixu()">继续</button></div>
+                <div><button onclick="game.proceed()">继续</button></div>
             </div>
         </div>
 
     </body>
 </html>
-<script type="text/javascript" src="js/zepto.min.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
-<script type="text/javascript" src="js/drop.js?v=2016121302"></script>
-<script type="application/ecmascript">
-    $('#ourplan').drop({
-        action:function(tocher) {
-            tocher.resetload();
-        }
-    })
-</script>
+<script type="text/javascript" src="public/js/lib/zepto.min.js?v=2016121601"></script>
+<script type="text/javascript" src="public/js/model.js?v=2016121601"></script>
+<script type="text/javascript" src="public/js/tocher.js?v=2016121601"></script>
+<script type="text/javascript" src="public/js/game.js?v=2016121601"></script>

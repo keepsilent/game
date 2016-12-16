@@ -1,11 +1,11 @@
 /**
- * 拖动元素自加加载新的数据
+ * 触屏控制
  *
  * @author keepsilent
  * @version 1.0.0
  */
 ;(function($){
-    $.fn.drop = function(options){
+    $.fn.tocher = function(options){
         var defaults = {
             _this: this,
             offsetX: 12,
@@ -28,7 +28,7 @@
             },
             move:function(event) {
                 if (event.touches.length > 1 || event.scale && event.scale !== 1) { //多点触摸,当屏幕有多个touch或者页面被缩放过，就不执行move操作
-                    //return false;
+                    return false;
                 }
                 tocher.endPostion = {
                     x:event.touches[0].pageX,
@@ -41,12 +41,18 @@
                 tocher.postition(tocher.endPostion.x,tocher.endPostion.y);
             },
             postition:function(x, y) {
+                //游戏没开始或游戏暂停,不移动
+                if(game.playStatus ==  0 || game.stopStatus == 1) {
+                    return false;
+                }
+
+                //超出边界,不移动
                 if(x < options.offsetX || x > tocher.width - options.offsetX || y < options.offsexY || y > tocher.height - options.offsexY) {
                     return false;
                 }
 
-                ourPlan.style.left = x - selfplan.plansizeX / 2 + "px";
-                ourPlan.style.top = y - selfplan.plansizeY / 2 + "px";
+                game.role.style.left = x - game.myself.plansizeX / 2 + "px";
+                game.role.style.top = y - game.myself.plansizeY / 2 + "px";
             }
         };
         var operate = {
