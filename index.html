@@ -8,10 +8,10 @@
         <link rel="stylesheet" type="text/css" href="public/css/style.css?v=2016121602"/>
     </head>
     <body onload="game.init()">
-        <div id="contentdiv" class="wrap">
+        <div id="contentdiv" class="index-wrap">
 
             <!-- Begin Start -->
-            <div id="startdiv" class="begin-wrap">
+            <div id="begin-wrap" class="begin-wrap">
                 <div class="begin-inner">
                     <div class="begin-btn-box">
                         <span class="begin-btn tc" onclick="game.begin()">开始游戏</span>
@@ -30,7 +30,7 @@
             <!-- Score End -->
 
             <!-- Main Start -->
-            <div id="maindiv" onclick="game.stop()"></div>
+            <div id="content" class="content" onclick="game.stop()"></div>
             <!-- Main End -->
 
             <!-- Over Start -->
@@ -39,34 +39,24 @@
                     <div class="over-box-wrap">
                         <div class="over-box">
                             <dl>
-                                <dt class="tc">分数: <i id="user-score">0</i></dt>
-                                <dd><a class="tc" href="javascript:game.stop();">继续</a></dd>
-                                <dd><a class="tc" href="javascript:void(0);">重新开始</a></dd>
-                                <dd><a class="tc" href="./index.html">回到首页</a></dd>
+                                <dt class="tc">分数: <i id="over-value">0</i></dt>
+                                <dd><a id="proceed-btn" class="tc" href="javascript:game.stop();">继续</a></dd>
+                                <dd><a id="restarting-btn" class="tc" href="javascript:game.restarting();">重新开始</a></dd>
+                                <dd><a id="index-btn" class="tc" href="./index.html">回到首页</a></dd>
                             </dl>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Over End -->
-            <!--
-           <div id="suspenddiv" class="hide">
-               <button>继续</button><br/>
-               <button>重新开始</button><br/>
-               <button>回到主页</button>
-           </div>
-
-
-           <div id="enddiv" class="over-wrap" >
-               <p class="plantext">飞机大战分数</p>
-               <p id="planscore">0</p>
-               <div><button onclick="game.proceed()">继续</button></div>
-           </div>
-           -->
         </div>
+
+        <!-- Share Start -->
         <div id="share-box" class="share-box hide" onclick="config.share(0)">
             <img src="./public/images/index/index_share.png" width="100%"/>
         </div>
+        <!-- Share End -->
+
         <!-- Rule Start -->
         <div id="rule-box" class="rule-wrap hide">
             <div class="rule-inner">
@@ -120,6 +110,16 @@
             </div>
         </div>
         <!-- Rule End -->
+
+        <audio id="background-music" style="display: none;"  preload="auto" loop="true">
+            <source src="./public/music/background.mp3" type="audio/mpeg" />
+        </audio>
+
+        <audio id="bullet-music" style="display: none;"  preload="auto" loop="true">
+            <source src="./public/music/bullet.mp3" type="audio/mpeg" />
+        </audio>
+
+        5540.mp3
     </body>
 </html>
 <script type="text/javascript" src="public/js/lib/zepto.min.js?v=2016121601"></script>

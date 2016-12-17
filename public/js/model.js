@@ -1,7 +1,3 @@
-var mainDiv = document.getElementById("maindiv"); //获得主界面
-var startdiv = document.getElementById("startdiv");  //获得开始界面
-var suspenddiv = document.getElementById("suspenddiv"); //获得暂停界面
-
 /**
  * 敌人模型
  * @method plan
@@ -32,18 +28,18 @@ function plan(hp,X,Y,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
 
 
     this.planmove = function() { //移动行为
-        if(game.scores <= 50000) {
+        if(game.scores <= 100) {
             this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + "px";
-        } else if(game.scores  > 50000 && game.scores  <= 100000) {
+        } else if(game.scores > 100 && game.scores  <= 200) {
             this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 1 + "px";
-        }  else if(game.scores  > 100000&&game.scores  <= 150000) {
-            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu+2+"px";
-        } else if(game.scores  > 150000&&game.scores  <= 200000){
-            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu+3+"px";
-        } else if(game.scores  > 200000 && game.scores  <= 300000) {
-            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu+4+"px";
+        }  else if(game.scores > 200 && game.scores  <= 300) {
+            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 2 + "px";
+        } else if(game.scores > 300 && game.scores <= 400){
+            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 3 + "px";
+        } else if(game.scores > 400 && game.scores <= 500) {
+            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 4 + "px";
         } else {
-            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu+5+"px";
+            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 5 + "px";
         }
     }
 
@@ -52,7 +48,7 @@ function plan(hp,X,Y,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
         this.imagenode.style.left = this.planX + "px";
         this.imagenode.style.top = this.planY + "px";
         this.imagenode.src = imagesrc;
-        mainDiv.appendChild(this.imagenode);
+        game.content.appendChild(this.imagenode);
     }
 
     this.init();
@@ -84,7 +80,7 @@ function bullet(X,Y,sizeX,sizeY,imagesrc){
         this.bulletimage.style.left = this.bulletX+"px";
         this.bulletimage.style.top = this.bulletY+"px";
         this.bulletimage.src = imagesrc;
-        mainDiv.appendChild(this.bulletimage);
+        game.content.appendChild(this.bulletimage);
     }
 
     this.init();

@@ -19,6 +19,19 @@ var game = (function() {
     var enemys = []; //敌机对象数组
     var bullets = []; //子弹对象数组
     var body = ''; //body控制器
+    var elements = {
+        beginWrap: 'begin-wrap'//游戏开始界面
+        ,content: 'content' //游戏容器
+        ,protagonist: 'protagonist' //主角
+        ,scoreBox: 'score-box' //游戏分数框
+        ,scoreBoxValue: 'score-value' //游戏分粉框显示积分
+        ,overBox: 'over-box' //游戏结束框
+        ,overBoxValue : 'over-value' //游戏结束框显示积分
+        ,overBoxProceedBtn : 'proceed-btn' //继续按钮
+        ,backgroundMusic : document.getElementById('background-music') //背景音乐
+        ,bulletMusic: document.getElementById('bullet-music') //子弹音乐
+    };
+    var content = document.getElementById(elements.content);
 
     /**
      * 游戏初始化
@@ -27,17 +40,17 @@ var game = (function() {
     var init = function() {
         //设置容器大小
         $('#contentdiv').css({'width':width,'height':height});
-        $('#startdiv').css({'width':width,'height':height});
-        $('#maindiv').css({'width':width,'height':height});
+        $('#'+elements.beginWrap).css({'width':width,'height':height});
+        $('#'+elements.content).css({'width':width,'height':height});
 
         if(!isMobile()) {
             alert('游戏初始失败');
             return;
         }
 
-        game.myself = new createRole('role');
+        game.myself = new createRole(elements.protagonist);
         game.myself.imagenode.style.display = "none"; //初始化隐藏本方飞机
-        game.role = document.getElementById('role');
+        game.role = document.getElementById(elements.protagonist);
 
         //game.body = document.getElementsByTagName("body")[0];
         //game.myself.imagenode.attachEvent("onclick",stop); //为本方飞机添加暂停事件
@@ -57,7 +70,7 @@ var game = (function() {
             suspenddiv.getElementsByTagName("button")[2].attachEvent("click",proceed,true); //为暂停界面的返回主页按钮添加事件
         }*/
 
-        $('#role').tocher({action:function(tocher) {
+        $('#'+elements.protagonist).tocher({action:function(tocher) {
             tocher.resetload();
         }});
 
@@ -74,10 +87,10 @@ var game = (function() {
      */
     var begin = function() {
         game.playStatus = 1;
-        startdiv.style.display = "none";
-        mainDiv.style.display = "block";
+        $('#'+elements.content).show();
+        $('#'+elements.scoreBox).show();
+        $('#'+elements.beginWrap).hide();
         game.myself.imagenode.style.display = "block";
-        $('#score-box').show();
         game.playing = setInterval(start,20); //调用开始函数
     }
 
@@ -94,6 +107,10 @@ var game = (function() {
      * @method stop
      */
     var stop = function() {
+        if(game.playStatus == 0) { //游戏结束
+            return false;
+        }
+
         if(game.stopStatus == 0) {
             //suspenddiv.style.display = "block";
             /*
@@ -104,7 +121,7 @@ var game = (function() {
                 mainDiv.detachEvent("onmousemove",roleMove);
                 game.body.detachEvent("onmousemove",boundary);
             }*/
-            $('#over-box').show();
+            showStopBox(1);
             clearInterval(game.playing);
             game.stopStatus = 1;
         } else {
@@ -117,10 +134,62 @@ var game = (function() {
                 mainDiv.attachEvent("onmousemove",roleMove);
                 game.body.attachEvent("onmousemove",boundary);
             }*/
-            $('#over-box').hide();
+            showStopBox(0);
             game.playing = setInterval(start,20);
             game.stopStatus = 0;
         }
+    }
+
+    /**
+     * 显示暂停框
+     * @method showStopBox
+     * @param {Number} status 状态
+     */
+    var showStopBox = function(status) {
+        $('#'+elements.overBoxProceedBtn).removeAttr('style');
+        if(status == 1) {
+            $('#'+elements.overBox).show();
+            $('#'+elements.overBoxValue).html(game.scores);
+            if(game.playStatus == 0) {
+                $('#'+elements.overBoxProceedBtn).css('background','#CCC');
+            }
+            controlMusic(0);
+        } else {
+            $('#'+elements.overBox).hide();
+            $('#'+elements.overBoxValue).html(0);
+            controlMusic(1);
+        }
+    }
+
+
+    /**
+     * 重新开始
+     * @method restarting
+     */
+    var restarting = function() {
+        game.enemys = [];
+        game.bullets = [];
+        game.scores = 0;
+        game.stopStatus = 0;
+        game.playStatus = 1;
+        game.backgroundPositonY = 0;
+        game.encounterRate = { small: 0, big: 0 };
+
+        clearInterval(game.playing);
+        $('#'+elements.overBox).hide();
+        $('#'+elements.content).html('');
+        $('#'+elements.scoreBoxValue).html(0);
+
+        game.myself = new createRole(elements.protagonist);
+        game.myself.imagenode.style.display = "none"; //初始化隐藏本方飞机
+        game.role = document.getElementById(elements.protagonist);
+        game.myself.imagenode.style.display = "block";
+
+        $('#'+elements.protagonist).tocher({action:function(tocher) {
+            tocher.resetload();
+        }});
+
+        game.playing = setInterval(start,20); //调用开始函数
     }
 
     /**
@@ -128,7 +197,7 @@ var game = (function() {
      * @method backgroundMove
      */
     var backgroundMove = function() {
-        mainDiv.style.backgroundPositionY = game.backgroundPositonY + "px";
+        game.content.style.backgroundPositionY = game.backgroundPositonY + "px";
         game.backgroundPositonY += backgroundOffset;
         if(game.backgroundPositonY > height){
             game.backgroundPositonY = 0;
@@ -172,7 +241,7 @@ var game = (function() {
             }
 
             if(game.enemys[i].imagenode.offsetTop > height){ //如果敌人超出边界,删除敌人
-                mainDiv.removeChild(game.enemys[i].imagenode);
+                game.content.removeChild(game.enemys[i].imagenode);
                 game.enemys.splice(i,1);
                 len--;
             }
@@ -180,7 +249,7 @@ var game = (function() {
             if(game.enemys[i].planisdie == true) { //当敌人死亡标记为true时，经过一段时间后清除敌机
                 game.enemys[i].plandietimes += 20;
                 if(game.enemys[i].plandietimes == game.enemys[i].plandietime){
-                    mainDiv.removeChild(game.enemys[i].imagenode);
+                    game.content.removeChild(game.enemys[i].imagenode);
                     game.enemys.splice(i,1);
                     len--;
                 }
@@ -225,7 +294,7 @@ var game = (function() {
         for(var i = 0; i < len; i++) { //移动子弹
             game.bullets[i].bulletmove();
             if(game.bullets[i].bulletimage.offsetTop < 0) { //如果子弹超出边界,删除子弹
-                mainDiv.removeChild(game.bullets[i].bulletimage);
+                game.content.removeChild(game.bullets[i].bulletimage);
                 game.bullets.splice(i,1);
                 len--;
             }
@@ -280,6 +349,7 @@ var game = (function() {
         createBullet(); //生成子弹
         bulletMove(); // 子弹移动
         event(); //事件处理
+        controlMusic(1);
     }
 
     /**
@@ -296,12 +366,9 @@ var game = (function() {
                    if(collide(game.enemys[j].imagenode.offsetLeft,game.enemys[j].plansizeX,game.myself.imagenode.offsetLeft,game.myself.plansizeX)) {
                         if(game.enemys[j].imagenode.offsetTop + game.enemys[j].plansizeY >= game.myself.imagenode.offsetTop + 40 && game.enemys[j].imagenode.offsetTop <= game.myself.imagenode.offsetTop - 20 + game.myself.plansizeY){
                             //碰撞本方飞机，游戏结束，统计分数
-                            $('#score-box').show();
-                            $('#over-box').show();
-                            $('#user-score').html(game.scores);
-                            game.playStatus = 0
-                            //game.enemys[j].imagenode.src = game.enemys[j].planboomimage;
+                            game.playStatus = 0;
                             game.myself.imagenode.src = "public/images/material/protagonist_explode.gif";
+                            showStopBox(1);
                             clearInterval(game.playing);
 
                             /*
@@ -319,14 +386,14 @@ var game = (function() {
                     if(collide(game.bullets[k].bulletimage.offsetLeft,game.bullets[k].bulletsizeX,game.enemys[j].imagenode.offsetLeft,game.enemys[j].plansizeX)) {
                         if(game.bullets[k].bulletimage.offsetTop <= game.enemys[j].imagenode.offsetTop + game.enemys[j].plansizeY && game.bullets[k].bulletimage.offsetTop + game.bullets[k].bulletsizeY >= game.enemys[j].imagenode.offsetTop){
                             game.enemys[j].planhp = game.enemys[j].planhp - game.bullets[k].bulletattach; //敌机血量减子弹攻击力
-                            if(game.enemys[j].planhp == 0) {  //敌机血量为0，敌机图片换为爆炸图片，死亡标记为true，计分
+                            if(game.enemys[j].planhp == 0 && game.playStatus == 1) {  //敌机血量为0，敌机图片换为爆炸图片，死亡标记为true，计分
                                 game.scores += game.enemys[j].planscore;
-                                $('#score-value').html(game.scores);
                                 game.enemys[j].imagenode.src = game.enemys[j].planboomimage;
                                 game.enemys[j].planisdie = true;
+                                $('#'+elements.scoreBoxValue).html(game.scores);
                             }
 
-                            mainDiv.removeChild(game.bullets[k].bulletimage); //删除子弹
+                            game.content.removeChild(game.bullets[k].bulletimage); //删除子弹
                             game.bullets.splice(k,1);
                             bulletslen--;
                             break;
@@ -375,15 +442,15 @@ var game = (function() {
 
         if(bodyobjX < 5 || bodyobjX > width - 5 || bodyobjY < 0 || bodyobjY > height - 5 ){
             if(document.removeEventListener) {
-                mainDiv.removeEventListener("mousemove",roleMove,true);
+                game.content.removeEventListener("mousemove",roleMove,true);
             } else if(document.detachEvent){
-                mainDiv.detachEvent("onmousemove",roleMove);
+                game.content.detachEvent("onmousemove",roleMove);
             }
         } else {
             if(document.addEventListener){
-                mainDiv.addEventListener("mousemove",roleMove,true);
+                game.content.addEventListener("mousemove",roleMove,true);
             } else if(document.attachEvent){
-                mainDiv.attachEvent("nomousemove",roleMove);
+                game.content.attachEvent("nomousemove",roleMove);
             }
         }
     }
@@ -404,12 +471,30 @@ var game = (function() {
         return false;
     }
 
+    /**
+     * 控制背景音乐
+     * @method controlMusic
+     */
+    var controlMusic = function(status) {
+        if(status == 1) {
+            elements.backgroundMusic.play();
+            elements.backgroundMusic.volume = 0.3;
+
+            elements.bulletMusic.play();
+            elements.bulletMusic.volume = 0.5;
+        } else {
+            elements.backgroundMusic.pause();
+            elements.bulletMusic.pause();
+        }
+    }
+
     return {
         init:init
         ,begin:begin
         ,proceed:proceed
         ,stop:stop
         ,playing:playing
+        ,restarting:restarting
         ,stopStatus:stopStatus
         ,playStatus:playStatus
         ,scores:scores
@@ -419,5 +504,6 @@ var game = (function() {
         ,encounterRate:encounterRate
         ,enemys:enemys
         ,bullets:bullets
+        ,content:content
     }
 })();
