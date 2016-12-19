@@ -26,8 +26,9 @@ var config = (function() {
      * @method base.preventPenetration
      */
     var preventPenetration = function(){
+        var page = $('#page-mark').val();
         if(getUserAgent()){      //ios
-            $('#contentdiv').css('overflow','hidden');
+            $('.'+page+'-wrap').css('overflow','hidden');
             return false;
         }
         config.bodyscrollTop = $(window).scrollTop();
@@ -40,7 +41,7 @@ var config = (function() {
      */
     var recoverPenetration = function(){
         if(getUserAgent()){      //ios
-            $('#contentdiv').css('overflow','');
+            $('.'+page+'-wrap').css('overflow','');
             return false;
         }
         $('html,body').removeClass('penetration-in');
@@ -114,16 +115,15 @@ var rule = (function() {
         if(stauts == 1) {
             $(id).show();
             init();
+            config.preventPenetration();
             if(page == 'index') {
                 game.bodyScroll = 1;
-                config.preventPenetration();
             }
-
         } else {
             $(id).hide();
+            config.recoverPenetration();
             if(page == 'index') {
                 game.bodyScroll = 0;
-                config.recoverPenetration();
             }
         }
     }
