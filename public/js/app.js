@@ -110,15 +110,21 @@ var rule = (function() {
      * @param stauts
      */
     var show = function(stauts) {
+        var page = $('#page-mark').val();
         if(stauts == 1) {
-            game.bodyScroll = 1;
             $(id).show();
             init();
-            config.preventPenetration();
+            if(page == 'index') {
+                game.bodyScroll = 1;
+                config.preventPenetration();
+            }
+
         } else {
-            game.bodyScroll = 0;
             $(id).hide();
-            config.recoverPenetration();
+            if(page == 'index') {
+                game.bodyScroll = 0;
+                config.recoverPenetration();
+            }
         }
     }
 
