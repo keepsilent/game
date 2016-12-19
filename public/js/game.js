@@ -33,6 +33,7 @@ var game = (function() {
     };
     var content = document.getElementById(elements.content);
     var bodyScroll = 0; //充许滚动
+    var ready = { status: 0, material:0 }; //游戏准备好
 
     /**
      * 游戏初始化
@@ -72,6 +73,19 @@ var game = (function() {
             suspenddiv.getElementsByTagName("button")[2].attachEvent("click",proceed,true); //为暂停界面的返回主页按钮添加事件
         }*/
 
+
+        $('.material-control img').each(function() { //素材加载
+            var img = new Image();
+            img.src = $(this).attr('src');
+            img.onload = function (){
+                game.ready.material++;
+                if(game.ready.material >= 8) {
+                    game.ready.status = 1;
+                    $('.begin-btn').css('background','#FFF');
+                }
+            }
+        });
+
         $('#'+elements.protagonist).tocher({action:function(tocher) {
             tocher.resetload();
         }});
@@ -92,6 +106,10 @@ var game = (function() {
      * @method begin
      */
     var begin = function() {
+        if(game.ready.status == 0) {
+            alert('游戏加载中,请稍候！');
+            return false;
+        }
         game.playStatus = 1;
         $('#'+elements.content).show();
         $('#'+elements.scoreBox).show();
@@ -512,5 +530,6 @@ var game = (function() {
         ,bullets:bullets
         ,content:content
         ,bodyScroll:bodyScroll
+        ,ready:ready
 }
 })();
