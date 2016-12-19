@@ -27,7 +27,7 @@ var config = (function() {
      */
     var preventPenetration = function(){
         if(getUserAgent()){      //ios
-            $('#main').css('overflow','hidden');
+            $('#contentdiv').css('overflow','hidden');
             return false;
         }
         config.bodyscrollTop = $(window).scrollTop();
@@ -40,7 +40,7 @@ var config = (function() {
      */
     var recoverPenetration = function(){
         if(getUserAgent()){      //ios
-            $('#main').css('overflow','');
+            $('#contentdiv').css('overflow','');
             return false;
         }
         $('html,body').removeClass('penetration-in');
