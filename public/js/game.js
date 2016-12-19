@@ -78,10 +78,11 @@ var game = (function() {
 
         //阻止body冒泡事件
         document.body.addEventListener('touchmove', function (event) {
-            if(game.game.bodyScroll == 0) {
-                event.preventDefault();
-                return false;
+            if(game.bodyScroll == 1) {
+                return true;
             }
+            event.preventDefault();
+            return false;
 
         }, false)
     }
