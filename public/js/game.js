@@ -46,7 +46,7 @@ var game = (function() {
         $('#'+elements.content).css({'width':width,'height':height});
 
         if(!isMobile()) {
-            alert('游戏初始失败');
+            tipsBox.alert('抱歉,游戏不支持该设备!!!');
             return;
         }
 
@@ -107,7 +107,7 @@ var game = (function() {
      */
     var begin = function() {
         if(game.ready.status == 0) {
-            alert('游戏加载中,请稍候！');
+            tipsBox.alert('游戏正在加载,请稍候！');
             return false;
         }
         game.playStatus = 1;
