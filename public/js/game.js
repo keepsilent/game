@@ -78,7 +78,6 @@ var game = (function() {
 
         //阻止body冒泡事件
         document.body.addEventListener('touchmove', function (event) {
-            alert('test');
             if(game.bodyScroll == 1) {
                 return true;
             }
