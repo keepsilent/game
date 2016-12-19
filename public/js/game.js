@@ -32,6 +32,7 @@ var game = (function() {
         ,bulletMusic: document.getElementById('bullet-music') //子弹音乐
     };
     var content = document.getElementById(elements.content);
+    var bodyScroll = 0; //充许滚动
 
     /**
      * 游戏初始化
@@ -48,6 +49,7 @@ var game = (function() {
             return;
         }
 
+        game.bodyScroll = 0;
         game.myself = new createRole(elements.protagonist);
         game.myself.imagenode.style.display = "none"; //初始化隐藏本方飞机
         game.role = document.getElementById(elements.protagonist);
@@ -76,7 +78,7 @@ var game = (function() {
 
         //阻止body冒泡事件
         document.body.addEventListener('touchmove', function (event) {
-            if(rule.showStatus == 0) {
+            if(game.game.bodyScroll == 0) {
                 event.preventDefault();
                 return false;
             }
@@ -508,5 +510,6 @@ var game = (function() {
         ,enemys:enemys
         ,bullets:bullets
         ,content:content
-    }
+        ,bodyScroll:bodyScroll
+}
 })();
