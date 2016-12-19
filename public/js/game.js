@@ -76,8 +76,11 @@ var game = (function() {
 
         //阻止body冒泡事件
         document.body.addEventListener('touchmove', function (event) {
-            event.preventDefault();
-            return false;
+            if(showStatus == 0) {
+                event.preventDefault();
+                return false;
+            }
+
         }, false)
     }
 

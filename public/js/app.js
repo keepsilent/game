@@ -34,6 +34,7 @@ var rule = (function() {
     var id = '#rule-box';
     var wrap = '#rule-box-wrap';
     var box = '#rule-box-inner';
+    var showStatus = 0;
 
     /**
      * 规则初始化
@@ -55,14 +56,17 @@ var rule = (function() {
      */
     var show = function(stauts) {
         if(stauts == 1) {
+            rule.showStatus = 1;
             $(id).show();
             init();
         } else {
+            rule.showStatus = 0;
             $(id).hide();
         }
     }
 
     return {
         show:show
+        ,showStatus:showStatus
     }
 })();
