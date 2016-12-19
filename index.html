@@ -111,15 +111,28 @@
         </div>
         <!-- Rule End -->
 
-        <audio id="background-music" style="display: none;"  preload="auto" loop="true">
-            <source src="./public/music/background.mp3" type="audio/mpeg" />
-        </audio>
+        <!-- Hide Start -->
+        <div class="music-control hide" style="display: none;">
+            <audio id="background-music" style="display: none;"  preload="auto" loop="true">
+                <source src="./public/music/background.mp3" type="audio/mpeg" />
+            </audio>
 
-        <audio id="bullet-music" style="display: none;"  preload="auto" loop="true">
-            <source src="./public/music/bullet.mp3" type="audio/mpeg" />
-        </audio>
-
-        5540.mp3
+            <audio id="bullet-music" style="display: none;"  preload="auto" loop="true">
+                <source src="./public/music/bullet.mp3" type="audio/mpeg" />
+            </audio>
+        </div>
+        <div class="material-control hide" style="display: none;">
+            <img src="./public/images/material/bullet_01.png" width="0" height="0"/>
+            <img src="./public/images/material/enemy_01.png" width="0" height="0"/>
+            <img src="./public/images/material/enemy_02.png" width="0" height="0"/>
+            <img src="./public/images/material/enemy_03.png" width="0" height="0"/>
+            <img src="./public/images/material/enemy_explode_01.gif" width="0" height="0"/>
+            <img src="./public/images/material/enemy_explode_02.gif" width="0" height="0"/>
+            <img src="./public/images/material/enemy_explode_03.gif" width="0" height="0"/>
+            <img src="./public/images/material/protagonist.gif" width="0" height="0"/>
+            <img src="./public/images/material/protagonist_explode.gif" width="0" height="0"/>
+        </div>
+        <!-- Hide End -->
     </body>
 </html>
 <script type="text/javascript" src="public/js/lib/zepto.min.js?v=2016121601"></script>
