@@ -306,12 +306,7 @@ var game = (function() {
      * @method createBullet
      */
     var createBullet = function() {
-        if(game.encounterRate.small % 20 == 0) { //创建子弹
-            game.bullets.push(new createBulletClass(parseInt(game.myself.imagenode.style.left)+31,parseInt(game.myself.imagenode.style.top)));
-
-        }
-
-        if(game.encounterRate.small % 25 == 0) { //创建子弹
+        if(game.encounterRate.small % 5 == 0) { //创建子弹
             game.bullets.push(new createBulletClass(parseInt(game.myself.imagenode.style.left)+31,parseInt(game.myself.imagenode.style.top)));
         }
     }
@@ -514,11 +509,11 @@ var game = (function() {
             elements.backgroundMusic.play();
             elements.backgroundMusic.volume = 0.3;
 
-            elements.bulletMusic.play();
-            elements.bulletMusic.volume = 0.5;
+            //elements.bulletMusic.play();
+            //elements.bulletMusic.volume = 0.5;
         } else {
             elements.backgroundMusic.pause();
-            elements.bulletMusic.pause();
+            //elements.bulletMusic.pause();
         }
     }
 
