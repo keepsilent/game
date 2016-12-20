@@ -529,14 +529,15 @@ var game = (function() {
 
         $('.begin-btn-box').css('top',showHeight);
         if(remarkHeight < 100) {
-            $('.begin-wrap').css('background-position-y',bgHeight * -0.1);
-            showHeight = showHeight - bgHeight * 0.1;
-            remarkHeight = remarkHeight + bgHeight * 0.1;
-            if(remarkHeight > 100) {
-                $('.begin-btn-box').css('top',showHeight);
-            } else {
+            if(remarkHeight + topHeight < 100) {
                 $('.begin-btn-box').css({'top':'inherit','bottom':'0'});
+                return false;
             }
+
+            topHeight = topHeight - (100 - remarkHeight);
+            showHeight = showHeight - topHeight;
+            $('.begin-wrap').css('background-position-y',topHeight * -1);
+            $('.begin-btn-box').css('top',showHeight);
         }
     }
 
