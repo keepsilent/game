@@ -308,6 +308,11 @@ var game = (function() {
     var createBullet = function() {
         if(game.encounterRate.small % 20 == 0) { //创建子弹
             game.bullets.push(new createBulletClass(parseInt(game.myself.imagenode.style.left)+31,parseInt(game.myself.imagenode.style.top)));
+
+        }
+
+        if(game.encounterRate.small % 25 == 0) { //创建子弹
+            game.bullets.push(new createBulletClass(parseInt(game.myself.imagenode.style.left)+31,parseInt(game.myself.imagenode.style.top)));
         }
     }
 
