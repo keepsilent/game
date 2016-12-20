@@ -527,8 +527,6 @@ var game = (function() {
         var showHeight = parseInt(bgHeight * 0.72);
         var topHeight = parseInt(bgHeight * 0.1);
         var remarkHeight = height - showHeight;
-        console.log(minHeight);
-        alert(minHeight);
 
         $('.begin-btn-box').css('top',showHeight);
         if(remarkHeight < minHeight) {
@@ -537,7 +535,7 @@ var game = (function() {
                 return false;
             }
 
-            topHeight = topHeight - (minHeight - remarkHeight);
+            topHeight =  (minHeight - remarkHeight) + 10;
             showHeight = showHeight - topHeight;
             $('.begin-wrap').css('background-position-y',topHeight * -1);
             $('.begin-btn-box').css('top',showHeight);
