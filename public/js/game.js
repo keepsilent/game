@@ -522,19 +522,22 @@ var game = (function() {
      * @method setBeginBoxPosinto
      */
     var setBeginBoxPosinto = function() {
+        var minHeight = parseInt($('.begin-btn-box').height());
         var bgHeight = parseInt( width / 0.56 );
         var showHeight = parseInt(bgHeight * 0.72);
         var topHeight = parseInt(bgHeight * 0.1);
         var remarkHeight = height - showHeight;
+        console.log(minHeight);
+        alert(minHeight);
 
         $('.begin-btn-box').css('top',showHeight);
-        if(remarkHeight < 100) {
-            if(remarkHeight + topHeight < 100) {
+        if(remarkHeight < minHeight) {
+            if(remarkHeight + topHeight < minHeight) {
                 $('.begin-btn-box').css({'top':'inherit','bottom':'0'});
                 return false;
             }
 
-            topHeight = topHeight - (100 - remarkHeight);
+            topHeight = topHeight - (minHeight - remarkHeight);
             showHeight = showHeight - topHeight;
             $('.begin-wrap').css('background-position-y',topHeight * -1);
             $('.begin-btn-box').css('top',showHeight);

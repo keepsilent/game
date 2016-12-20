@@ -114,7 +114,7 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset; }
 .begin-btn-box span.begin-btn { background: #FFF; }
 .begin-btn-box table { width: 60%; margin: 0 auto; }
 .begin-btn-box table tr td { width: 50%; }
-.begin-btn-box table tr td span { width: 90%; min-width:86px; line-height: 32px; font-size: 0.875em; }
+.begin-btn-box table tr td span { width: 90%; min-width:86px; margin-bottom: 10px; line-height: 32px; font-size: 0.875em; }
 
 /* 游戏积分 */
 .score-wrap { position: fixed; top: 10px; left: 15px; width: auto; z-index: 1; }
