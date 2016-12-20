@@ -109,9 +109,12 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset; }
 /* 游戏开始界面 */
 .begin-wrap { position: fixed; top:0; left: 0; width: 100%; height: 100%; background-color: #212a43; background-repeat: no-repeat; background-image: url(../images/index/index_bg.jpg); background-size: 100% auto; overflow-y: hidden; z-index: 10; }
 .begin-inner { position: relative; width: 100%; height: 100%; }
-.begin-btn-box { position: absolute; left:0; bottom: 0; width: 100%; }
-.begin-btn-box span { display: block; width: 80%; line-height: 42px; margin: 0 auto 15px; color: #000; border-radius: 30px; background-color: #fedf2c; }
+.begin-btn-box { position: absolute; left:0; top: 70%; width: 100%; }
+.begin-btn-box span { display: block; width: 60%; min-width: 192px; line-height: 42px; margin: 0 auto 15px; color: #000; border-radius: 30px; background-color: #fedf2c; }
 .begin-btn-box span.begin-btn { background: #FFF; }
+.begin-btn-box table { width: 60%; margin: 0 auto; }
+.begin-btn-box table tr td { width: 50%; }
+.begin-btn-box table tr td span { width: 90%; min-width:86px; line-height: 32px; font-size: 0.875em; }
 
 /* 游戏积分 */
 .score-wrap { position: fixed; top: 10px; left: 15px; width: auto; z-index: 1; }
@@ -154,6 +157,13 @@ input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset; }
 .rule-box-inner div.rule-info {  padding-bottom: 5%; color: #333; }
 .rule-box-inner div.rule-info h3 { width: 90%; margin: 0 auto;  padding: 2px 0; font-size: 0.875em; line-height: 2; font-weight: normal; background: #ffa10d; border-radius: 5px; }
 .rule-box-inner div.rule-info ul { width: 90%; margin: 5% auto 0; font-size: 0.875em; line-height: 1.8; }
+
+.rule-box-inner div.rule-prize-image { margin-top: 2%; margin-bottom: -2%; color: #333;}
+.rule-box-inner div.rule-prize-image div { width: 90%; margin: 0 auto; }
+.rule-box-inner div.rule-prize-image ul { width: 99%; overflow: hidden; }
+.rule-box-inner div.rule-prize-image ul li { float: left; width: 30%; }
+.rule-box-inner div.rule-prize-image ul li.center { padding: 0 5%; }
+.rule-box-inner div.rule-prize-image ul li i { display: block; font-size: 0.75em; }
 
 
 

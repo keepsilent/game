@@ -5,7 +5,7 @@
         <meta http-equiv="Expires" content="-1">
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
-        <link rel="stylesheet" type="text/css" href="public/css/style.css?v=2016121911"/>
+        <link rel="stylesheet" type="text/css" href="public/css/style.css?v=2016122001"/>
     </head>
     <body onload="game.init()">
         <div id="contentdiv" class="index-wrap">
@@ -15,9 +15,14 @@
                 <div class="begin-inner">
                     <div class="begin-btn-box">
                         <span class="begin-btn tc" onclick="game.begin()" style="background: #CCC;">开始游戏</span>
-                        <span class="share-btn tc" onclick="config.share(1)">邀请好友</span>
-                        <span class="price-btn tc" onclick="rule.show(1)">奖品设置</span>
-
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td><span class="price-btn tc" onclick="rule.show(1)">奖品设置</span></td>
+                                    <td><span class="share-btn tc" onclick="config.share(1)">一起玩</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -71,25 +76,30 @@
                                         <tr>
                                             <td>一等奖:</td>
                                             <td>价值500元的卡壮烤箱</td>
-                                            <td class="tr"><a href="./prize_1.html">详情</a></td>
                                         </tr>
                                         <tr>
                                             <td>二等奖:</td>
                                             <td>价值300元的手持拌搅机</td>
-                                            <td class="tr"><a href="./prize_2.html">详情</a></td>
                                         </tr>
                                         <tr>
                                             <td>三等奖:</td>
                                             <td>价值150元的打蛋器</td>
-                                            <td class="tr"><a href="./prize_3.html">详情</a></td>
                                         </tr>
                                         <tr>
                                             <td>优秀奖:</td>
                                             <td>价值20元的咖啡一包</td>
-                                            <td class="tr"><a href="./prize_4.html">详情</a></td>
                                         </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="rule-prize-image">
+                                <div>
+                                    <ul>
+                                        <li><span class="ft-zero"><img src="./public/images/index/prize_01.jpg" width="100%"/></span><i class="tc">卡仕25I烤箱</i></li>
+                                        <li class="center"><span class="ft-zero"><img src="./public/images/index/prize_02.jpg" width="100%"/></span><i class="tc">卡仕料理机</i></li>
+                                        <li><span class="ft-zero"><img src="./public/images/index/prize_03.jpg" width="100%"/></span><i class="tc">卡仕打蛋器</i></li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="rule-active-time tc">
                                 <h3>活动时间</h3>
@@ -118,7 +128,7 @@
             </audio>
 
             <audio id="bullet-music" style="display: none;"  preload="auto" loop="true">
-                <source src="./public/music/bullet.mp3" type="audio/mpeg" />
+                <source src="./public/music/bullet.mp3?v=2016122001" type="audio/mpeg" />
             </audio>
         </div>
         <div class="material-control hide" style="display: none;">
@@ -137,8 +147,8 @@
         <input id="page-mark" type="hidden" value="index" />
     </body>
 </html>
-<script type="text/javascript" src="public/js/lib/zepto.min.js?v=2016121601"></script>
-<script type="text/javascript" src="public/js/app.js?v=2016121913"></script>
-<script type="text/javascript" src="public/js/model.js?v=2016121707"></script>
-<script type="text/javascript" src="public/js/tocher.js?v=2016121707"></script>
-<script type="text/javascript" src="public/js/game.js?v=2016121913"></script>
+<script type="text/javascript" src="public/js/lib/zepto.min.js?v=2016122001"></script>
+<script type="text/javascript" src="public/js/app.js?v=2016122001"></script>
+<script type="text/javascript" src="public/js/model.js?v=2016122001"></script>
+<script type="text/javascript" src="public/js/tocher.js?v=2016122001"></script>
+<script type="text/javascript" src="public/js/game.js?v=2016122001"></script>

@@ -44,6 +44,7 @@ var game = (function() {
         $('#contentdiv').css({'width':width,'height':height});
         $('#'+elements.beginWrap).css({'width':width,'height':height});
         $('#'+elements.content).css({'width':width,'height':height});
+        setBeginBoxPosinto();
 
         if(!isMobile()) {
             tipsBox.alert('抱歉,游戏不支持该设备!!!');
@@ -172,16 +173,17 @@ var game = (function() {
     var showStopBox = function(status) {
         $('#'+elements.overBoxProceedBtn).removeAttr('style');
         if(status == 1) {
+            controlMusic(0);
+
             $('#'+elements.overBox).show();
             $('#'+elements.overBoxValue).html(game.scores);
             if(game.playStatus == 0) {
                 $('#'+elements.overBoxProceedBtn).css('background','#CCC');
             }
-            controlMusic(0);
         } else {
+            controlMusic(1);
             $('#'+elements.overBox).hide();
             $('#'+elements.overBoxValue).html(0);
-            controlMusic(1);
         }
     }
 
@@ -304,7 +306,7 @@ var game = (function() {
      * @method createBullet
      */
     var createBullet = function() {
-        if(game.encounterRate.small % 5 == 0) { //创建子弹
+        if(game.encounterRate.small % 20 == 0) { //创建子弹
             game.bullets.push(new createBulletClass(parseInt(game.myself.imagenode.style.left)+31,parseInt(game.myself.imagenode.style.top)));
         }
     }
@@ -374,6 +376,7 @@ var game = (function() {
         bulletMove(); // 子弹移动
         event(); //事件处理
         controlMusic(1);
+
     }
 
     /**
@@ -394,6 +397,7 @@ var game = (function() {
                             game.myself.imagenode.src = "public/images/material/protagonist_explode.gif";
                             showStopBox(1);
                             clearInterval(game.playing);
+                            setTimeout("game.controlMusic(0)",30);
 
                             /*
                             if(document.removeEventListener) {
@@ -426,6 +430,7 @@ var game = (function() {
                 }
             }
         }
+
     }
 
     /**
@@ -512,6 +517,29 @@ var game = (function() {
         }
     }
 
+    /**
+     * 设置开始框位置
+     * @method setBeginBoxPosinto
+     */
+    var setBeginBoxPosinto = function() {
+        var bgHeight = parseInt( width / 0.56 );
+        var showHeight = parseInt(bgHeight * 0.72);
+        var topHeight = parseInt(bgHeight * 0.1);
+        var remarkHeight = height - showHeight;
+
+        $('.begin-btn-box').css('top',showHeight);
+        if(remarkHeight < 100) {
+            $('.begin-wrap').css('background-position-y',bgHeight * -0.1);
+            showHeight = showHeight - bgHeight * 0.1;
+            remarkHeight = remarkHeight + bgHeight * 0.1;
+            if(remarkHeight > 100) {
+                $('.begin-btn-box').css('top',showHeight);
+            } else {
+                $('.begin-btn-box').css({'top':'inherit','bottom':'0'});
+            }
+        }
+    }
+
     return {
         init:init
         ,begin:begin
@@ -531,5 +559,6 @@ var game = (function() {
         ,content:content
         ,bodyScroll:bodyScroll
         ,ready:ready
-}
+        ,controlMusic:controlMusic
+    }
 })();
