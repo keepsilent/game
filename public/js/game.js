@@ -34,6 +34,7 @@ var game = (function() {
     var content = document.getElementById(elements.content);
     var bodyScroll = 0; //充许滚动
     var ready = { status: 0, material:0 }; //游戏准备好
+    var user = {};
 
     /**
      * 游戏初始化
@@ -516,6 +517,7 @@ var game = (function() {
 
     return {
         init:init
+        ,user:user
         ,begin:begin
         ,proceed:proceed
         ,stop:stop
@@ -534,5 +536,6 @@ var game = (function() {
         ,bodyScroll:bodyScroll
         ,ready:ready
         ,controlMusic:controlMusic
+
     }
 })();
