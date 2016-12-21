@@ -92,8 +92,11 @@ var game = (function() {
             //data.access_token
             //getUserOpenId = data.openId;
 
+            console.log('获取用户信息');
         }, function () {
             //无法获取用户信息
+            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8b321dd09ade113f&redirect_uri=http%3a%2f%2fpigpicture.sinaapp.com%2fRSAKP%2fJSTest%2findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+            console.log('无法获取用户信息');
         });
     }
 
