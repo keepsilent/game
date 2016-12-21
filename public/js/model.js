@@ -1,6 +1,7 @@
 /**
  * 敌人模型
  * @method plan
+ * @param {String} name 名称
  * @param {Number} hp 血量
  * @param {Number} X 坐标X
  * @param {Number} Y 坐标Y
@@ -12,7 +13,8 @@
  * @param {String} boomimage 打败敌人的效果图
  * @param {String} imagesrc  敌人效果图
  */
-function plan(hp,X,Y,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
+function plan(name,hp,X,Y,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
+    this.name = name;
     this.planX = X;
     this.planY = Y;
     this.imagenode = null;
@@ -40,6 +42,11 @@ function plan(hp,X,Y,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
             this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 4 + "px";
         } else {
             this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 5 + "px";
+        }
+
+
+        if(this.name == 'chips' ) {
+            this.imagenode.style.top = this.imagenode.offsetTop + this.plansudu + 12 + "px";
         }
     }
 

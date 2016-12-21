@@ -56,25 +56,6 @@ var game = (function() {
         game.myself.imagenode.style.display = "none"; //初始化隐藏本方飞机
         game.role = document.getElementById(elements.protagonist);
 
-        //game.body = document.getElementsByTagName("body")[0];
-        //game.myself.imagenode.attachEvent("onclick",stop); //为本方飞机添加暂停事件
-        /*
-        game.body = document.getElementsByTagName("body")[0];
-        if(document.addEventListener) {
-            mainDiv.addEventListener("mousemove",roleMove,true);  //为本方飞机添加移动和暂停
-            game.myself.imagenode.addEventListener("click",stop,true);//为本方飞机添加暂停事件
-            game.body.addEventListener("mousemove",boundary,true); //为body添加判断本方飞机移出边界事件//为暂停界面的继续按钮添加暂停事件
-            suspenddiv.getElementsByTagName("button")[0].addEventListener("click",stop,true);//为暂停界面的继续按钮添加暂停事件
-            suspenddiv.getElementsByTagName("button")[2].addEventListener("click",proceed,true); //为暂停界面的返回主页按钮添加事件
-        } else if(document.attachEvent) {
-            mainDiv.attachEvent("onmousemove",roleMove); //为本方飞机添加移动
-            game.myself.imagenode.attachEvent("onclick",stop); //为本方飞机添加暂停事件
-            game.body.attachEvent("onmousemove",boundary);  //为body添加判断本方飞机移出边界事件
-            suspenddiv.getElementsByTagName("button")[0].attachEvent("onclick",stop); //为暂停界面的继续按钮添加暂停事件
-            suspenddiv.getElementsByTagName("button")[2].attachEvent("click",proceed,true); //为暂停界面的返回主页按钮添加事件
-        }*/
-
-
         $('.material-control img').each(function() { //素材加载
             var img = new Image();
             img.src = $(this).attr('src');
@@ -100,6 +81,19 @@ var game = (function() {
             return false;
 
         }, false)
+
+
+        setCallBackOnUserInfoReady(function (data) {
+            alert("成功获取用户" + data.userNickName + "信息");
+            //data.openId
+            //data.userNickName
+            //data.headImageUrl
+            //data.access_token
+            //getUserOpenId = data.openId;
+
+        }, function () {
+            //无法获取用户信息
+        });
     }
 
     /**
@@ -137,28 +131,10 @@ var game = (function() {
         }
 
         if(game.stopStatus == 0) {
-            //suspenddiv.style.display = "block";
-            /*
-            if(document.removeEventListener) {
-                mainDiv.removeEventListener("mousemove",roleMove,true);
-                game.body.removeEventListener("mousemove",boundary,true);
-            } else if(document.detachEvent) {
-                mainDiv.detachEvent("onmousemove",roleMove);
-                game.body.detachEvent("onmousemove",boundary);
-            }*/
             showStopBox(1);
             clearInterval(game.playing);
             game.stopStatus = 1;
         } else {
-            //suspenddiv.style.display = "none";
-            /*
-            if(document.addEventListener) {
-                mainDiv.addEventListener("mousemove",roleMove,true);
-                game.body.addEventListener("mousemove",boundary,true);
-            } else if(document.attachEvent) {
-                mainDiv.attachEvent("onmousemove",roleMove);
-                game.body.attachEvent("onmousemove",boundary);
-            }*/
             showStopBox(0);
             game.playing = setInterval(start,20);
             game.stopStatus = 0;
@@ -241,14 +217,14 @@ var game = (function() {
             game.encounterRate.big++;
 
             if(game.encounterRate.big % 5 == 0) { //生成中型敌人
-                game.enemys.push(new createEnemyClass(6,25,width-60,46,60,3,360,random(1,3),'public/images/material/enemy_explode_03.gif','public/images/material/enemy_03.png'));
+                game.enemys.push(new createEnemyClass('omelette',6,25,width-60,46,60,3,360,random(1,3),'public/images/material/enemy_explode_03.gif','public/images/material/enemy_03.png'));
             }
 
             if(game.encounterRate.big >= 20) { //生成大型敌人
-                game.enemys.push(new createEnemyClass(12,57,width-94,94,80,5,540,1,'public/images/material/enemy_explode_02.gif','public/images/material/enemy_02.png'));
+                game.enemys.push(new createEnemyClass('chips',24,57,width-94,94,80,5,540,1,'public/images/material/enemy_explode_02.gif','public/images/material/enemy_02.png'));
                 game.encounterRate.big = 0;
             } else { //生成小型敌人
-                game.enemys.push(new createEnemyClass(1,19,width-22,22,28,1,360,random(1,4),'public/images/material/enemy_explode_01.gif','public/images/material/enemy_01.png'));
+                game.enemys.push(new createEnemyClass('cake',1,19,width-22,22,28,1,360,random(1,4),'public/images/material/enemy_explode_01.gif','public/images/material/enemy_01.png'));
             }
 
             game.encounterRate.small = 0;
@@ -286,6 +262,7 @@ var game = (function() {
     /**
      * 生成敌人类
      * @method createEnemyClass
+     * @param {String} name 名字
      * @param {Number} hp 血量
      * @param {Number} X 坐标X
      * @param {Number} Y 坐标Y
@@ -297,8 +274,8 @@ var game = (function() {
      * @param {String} boomimage 打败敌人的效果图
      * @param {String} imagesrc  敌人效果图
      */
-    var createEnemyClass = function(hp,a,b,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
-        plan.call(this,hp,random(a,b),-100,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc);
+    var createEnemyClass = function(name,hp,a,b,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc){
+        plan.call(this,name,hp,random(a,b),-100,sizeX,sizeY,score,dietime,sudu,boomimage,imagesrc);
     }
 
     /**
@@ -346,7 +323,7 @@ var game = (function() {
     var createRole = function(name) {
         var X = (width - 69 ) / 2; //角色坐标X
         var Y = (height - 91 ) - (height * 0.1); //角色坐标Y
-        plan.call(this,1,X,Y,69,91,0,660,0,'public/image/protagonist_explode.gif','public/images/material/protagonist.gif');
+        plan.call(this,'protagonist',1,X,Y,69,91,0,660,0,'public/image/protagonist_explode.gif','public/images/material/protagonist.gif');
         this.imagenode.setAttribute('id',name);
     }
 
@@ -390,6 +367,9 @@ var game = (function() {
         for(var k = 0; k < bulletslen; k++){
             for(var j = 0; j < enemyslen; j++){
                 if(game.enemys[j].planisdie == false) {  //判断碰撞本方飞机
+                   if(game.playStatus == 0) {
+                       return false;
+                   }
                    if(collide(game.enemys[j].imagenode.offsetLeft,game.enemys[j].plansizeX,game.myself.imagenode.offsetLeft,game.myself.plansizeX)) {
                         if(game.enemys[j].imagenode.offsetTop + game.enemys[j].plansizeY >= game.myself.imagenode.offsetTop + 40 && game.enemys[j].imagenode.offsetTop <= game.myself.imagenode.offsetTop - 20 + game.myself.plansizeY){
                             //碰撞本方飞机，游戏结束，统计分数
@@ -398,15 +378,7 @@ var game = (function() {
                             showStopBox(1);
                             clearInterval(game.playing);
                             setTimeout("game.controlMusic(0)",30);
-
-                            /*
-                            if(document.removeEventListener) {
-                                mainDiv.removeEventListener("mousemove",roleMove,true);
-                                game.body.removeEventListener("mousemove",boundary,true);
-                            } else if(document.detachEvent) {
-                                mainDiv.detachEvent("onmousemove",roleMove);
-                                game.body.removeEventListener("mousemove",boundary,true);
-                            }*/
+                            sendGameResultToServer('123', game.scores,function () {}, function () {});
                         }
                     }
 
